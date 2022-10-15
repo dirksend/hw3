@@ -68,6 +68,12 @@ void dealloc(Node* head)
 // -----------------------------------------------
 
 
+class Comparison {
+public:
+    bool operator() (int x) {
+        return (x % 2 == 0);
+    }
+} predicate;
 
 
 
@@ -78,17 +84,56 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // -----------------------------------------------
-    // Feel free to update any code below this point
-    // -----------------------------------------------
-    Node* head = readList(argv[1]);
-    cout << "Original list: ";
-    print(head);
+    
+    // Pivot test
+    {
+        Node* input = readList(argv[1]);
+        Node* smaller = NULL;
+        Node* larger = NULL;
+        cout << "LLPIVOT:\n";
 
-    // Test out your linked list code
+        cout << "Original lists (input, smaller, larger):\n";
+        print(input);
+        print(smaller);
+        print(larger);
 
+        cout << "Pivoting...\n";
+        // Test out your linked list code
+        llpivot (input, smaller, larger, 5);
 
+        // Print again
+        cout << "After llrec (input, smaller, larger):\n";
+        print(input);
+        print(smaller);
+        print(larger);
 
+        // Clean up.
+        dealloc(input);
+        dealloc(smaller);
+        dealloc(larger);
+    }
+
+    // // Filter test
+    // {
+    //     Node* input = readList(argv[1]);
+    //     cout << "LLFITLER:\n";
+
+    //     cout << "Origioinal list (input):\n";
+    //     print(input);
+
+    //     // Test out your linked list code
+    //     cout << "Filtering...\n";
+    //     Node* filtered = llfilter<Comparison>(input, predicate);
+
+    //     // Print again
+    //     cout << "After llfilter (input, filtered):\n";
+    //     print(input);
+    //     print(filtered);
+
+    //     // Clean up.
+    //     dealloc(input);
+    //     dealloc(filtered);
+    // }
     
     return 0;
 
